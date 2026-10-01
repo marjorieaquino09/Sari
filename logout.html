@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Logging Out...</title>
+</head>
+<body style="background: #164a41; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+  <div style="text-align: center;">
+    <h2>Logging out...</h2>
+    <p>Please wait while we redirect you.</p>
+  </div>
+
+  <script type="module">
+    import { auth } from "./js/firebase-config.js";
+    import { signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    
+    localStorage.removeItem("sari_cart");
+
+    
+    signOut(auth)
+      .then(() => {
+        window.location.href = "login.html";
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+        window.location.href = "login.html";
+      });
+  </script>
+</body>
+</html>

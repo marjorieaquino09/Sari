@@ -1,0 +1,223 @@
+/* ===== Shared additions: topbar export button ===== */
+.topbar-export-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 18px;
+  border: none;
+  background: var(--sari-lime);
+  color: #14301f;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.topbar-export-btn:hover {
+  background: #8fb82c;
+}
+
+/* ===== Transactions summary row ===== */
+.txn-summary-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.txn-summary-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.txn-summary-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.txn-summary-icon.purple { background: #ece5fa; color: #7a5cd6; }
+.txn-summary-icon.orange { background: #fcedd4; color: #e29a33; }
+.txn-summary-icon.green  { background: #e6f5e6; color: #4a9c62; }
+
+.txn-range-btn {
+  width: 100%;
+  height: 100%;
+  min-height: 40px;
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #16352c;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.txn-range-btn i {
+  font-size: 0.75rem;
+  color: #9aa9a0;
+}
+
+/* Receipt / payment table cells */
+.receipt-cell {
+  font-weight: 700;
+  color: #4a9c62;
+}
+
+.payment-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 12px;
+}
+
+.payment-pill.cash   { background: #e5f5e5; color: #4a9c62; }
+.payment-pill.gcash  { background: #e5eefc; color: #3f6fa8; }
+.payment-pill.credit { background: #fcedd4; color: #e29a33; }
+
+.view-receipt-link {
+  color: #4a9c62;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.view-receipt-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== Credit ledger layout ===== */
+.ledger-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+  align-items: start;
+}
+
+.ledger-table-panel {
+  overflow-x: auto;
+}
+
+.avatar-dot {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.ledger-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ledger-stat-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ledger-stat-card .label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #9aa9a0;
+  margin-bottom: 4px;
+}
+
+.ledger-stat-card .value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #16352c;
+}
+
+.ledger-stat-icon {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.ledger-stat-icon.purple { background: #ece5fa; color: #7a5cd6; }
+.ledger-stat-icon.red    { background: #fae5e3; color: #d1544a; }
+.ledger-stat-icon.green  { background: #e6f5e6; color: #4a9c62; }
+
+.ledger-add-btn {
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .txn-summary-row { grid-template-columns: repeat(2, 1fr); }
+  .ledger-layout { grid-template-columns: 1fr; }
+}
+
+/* ===== Dashboard page ===== */
+.category-bar-row {
+  margin-bottom: 16px;
+}
+
+.category-bar-row:last-child {
+  margin-bottom: 0;
+}
+
+.category-bar-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #16352c;
+  margin-bottom: 6px;
+}
+
+.category-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 6px;
+  background: #eef1ee;
+  overflow: hidden;
+}
+
+.category-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+}
+
+.dashboard-mini-table thead th {
+  padding: 8px 8px;
+}
+
+.dashboard-mini-table tbody td {
+  padding: 10px 8px;
+}

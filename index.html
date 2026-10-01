@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Home</title>
+  <link rel="stylesheet" href="css/style.css?v=10.0">
+  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="app-page">
+
+  <div class="app-shell">
+
+   
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo">Sari</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="sidebar-link active">
+          <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
+          <span class="sidebar-label">Home</span>
+        </a>
+        <a href="inventory.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-box"></i></span>
+          <span class="sidebar-label">Inventory</span>
+        </a>
+        <a href="checkout.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-cash-register"></i></span>
+          <span class="sidebar-label">Checkout</span>
+        </a>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="credit-ledger.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span class="sidebar-label">Credit Ledger</span>
+        </a>
+        <a href="transactions.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-receipt"></i></span>
+          <span class="sidebar-label">Transactions</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <button id="logoutBtn" class="sidebar-logout" style="background:none; border:none; cursor:pointer; width:100%; text-align:left; color:inherit;">
+        <span class="sidebar-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+        <span class="sidebar-label">Log Out</span>
+      </button>
+    </aside>
+
+    
+    <main class="main-content">
+
+     
+      <div class="topbar-row">
+        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="topbar">
+          <div class="topbar-left">
+            <button class="topbar-home-btn" type="button">Home</button>
+          </div>
+       
+          <div class="topbar-store" id="profileBtn" style="color:inherit; cursor:default; display:flex; align-items:center; gap:10px;">
+            <span class="topbar-avatar" id="avatarContainer"></span>
+            <span id="topbarStoreName">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="search-box" style="margin-bottom: 20px;">
+        <form id="searchForm">
+          <input type="text" id="searchInput" placeholder="Search products...">
+        </form>
+      </div>
+
+     
+      <div class="category-filter-container">
+        <button class="category-pill active" data-category="All">All</button>
+        <button class="category-pill" data-category="Household">Household</button>
+        <button class="category-pill" data-category="Beverage">Beverage</button>
+        <button class="category-pill" data-category="Canned">Canned</button>
+        <button class="category-pill" data-category="Alcohol">Alcohol</button>
+        <button class="category-pill" data-category="Coffee & Tea">Coffee & Tea</button>
+        <button class="category-pill" data-category="Biscuits">Biscuits</button>
+        <button class="category-pill" data-category="Chips">Chips</button>
+        <button class="category-pill" data-category="Condiments">Condiments</button>
+        <button class="category-pill" data-category="Noodles">Noodles</button>
+      </div>
+
+      
+      <div id="productGrid" class="product-grid">
+        <p style="color: #ffffff; grid-column: 1 / -1; text-align: center; padding: 40px;">Loading products...</p>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/script.js?v=10.0"></script>
+  <script type="module" src="js/homepage.js"></script>
+</body>
+</html>

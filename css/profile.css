@@ -1,0 +1,620 @@
+/* ==========================================================
+   PROFILE & SETTINGS PAGE - CLEAN LAYOUT
+   ========================================================== */
+
+/* ==========================================================
+   APP SHELL
+   ========================================================== */
+
+.app-shell {
+  display: flex !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  background-color: #164A41 !important;
+  overflow: hidden !important;
+}
+
+
+/* ==========================================================
+   ICON SIDEBAR
+   ========================================================== */
+
+.icon-sidebar {
+  width: 74px !important;
+  min-width: 74px !important;
+  max-width: 74px !important;
+
+  height: 100vh !important;
+
+  background-color: #1B3B32 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  padding: 20px 0 !important;
+  gap: 14px !important;
+
+  flex-shrink: 0 !important;
+
+  box-sizing: border-box !important;
+
+  overflow: hidden !important;
+
+  z-index: 100 !important;
+}
+
+
+/* ==========================================================
+   SIDEBAR BUTTONS
+   ========================================================== */
+
+.icon-sidebar-menu-btn,
+.icon-nav-link {
+  width: 44px !important;
+  height: 44px !important;
+
+  min-width: 44px !important;
+  min-height: 44px !important;
+
+  border-radius: 50% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: #ffffff !important;
+
+  background: transparent !important;
+
+  text-decoration: none !important;
+
+  font-size: 1.05rem !important;
+
+  border: none !important;
+
+  cursor: pointer !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* Hover */
+
+.icon-nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+
+/* Active */
+
+.icon-nav-link.active {
+  background-color: #9DC88D !important;
+  color: #164A41 !important;
+}
+
+
+/* ==========================================================
+   MAIN CONTENT
+   ========================================================== */
+
+.main-content {
+  flex: 1 1 auto !important;
+
+  width: calc(100% - 74px) !important;
+
+  min-width: 0 !important;
+
+  height: 100vh !important;
+
+  padding: 24px 32px !important;
+
+  box-sizing: border-box !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  background-color: #164A41 !important;
+}
+
+
+/* ==========================================================
+   TOPBAR
+   ========================================================== */
+
+.topbar-row {
+  display: flex !important;
+  align-items: center !important;
+
+  width: 100% !important;
+
+  gap: 14px !important;
+
+  margin-bottom: 28px !important;
+}
+
+
+.topbar {
+  flex: 1 !important;
+
+  min-height: 60px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 8px 18px !important;
+
+  background: transparent !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+
+  border-radius: 32px !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* Topbar title */
+
+.topbar-home-btn {
+  background: transparent !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+
+  color: #ffffff !important;
+
+  padding: 9px 20px !important;
+
+  border-radius: 22px !important;
+
+  font-weight: 700 !important;
+
+  font-size: 0.9rem !important;
+
+  cursor: pointer !important;
+}
+
+
+/* Store information */
+
+.topbar-store {
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  color: #ffffff !important;
+
+  font-weight: 700 !important;
+
+  text-decoration: none !important;
+}
+
+
+.topbar-avatar {
+  width: 42px !important;
+  height: 42px !important;
+
+  border-radius: 50% !important;
+
+  background-color: #ffffff !important;
+
+  display: block !important;
+
+  object-fit: cover !important;
+}
+
+
+/* ==========================================================
+   PROFILE PAGE CONTAINER
+   ========================================================== */
+
+.profile-page {
+  width: 100% !important;
+
+  max-width: 900px !important;
+
+  margin: 0 auto !important;
+
+  padding-bottom: 40px !important;
+}
+
+
+/* ==========================================================
+   PROFILE TITLE
+   ========================================================== */
+
+.profile-page-title {
+  text-align: center !important;
+
+  margin: 10px 0 8px !important;
+
+  color: #ffffff !important;
+
+  font-size: 1.6rem !important;
+
+  font-weight: 800 !important;
+}
+
+
+.profile-page-subtitle {
+  text-align: center !important;
+
+  color: #CBD5E1 !important;
+
+  font-size: 0.9rem !important;
+
+  margin: 0 0 24px !important;
+}
+
+
+/* ==========================================================
+   PROFILE CARD
+   ========================================================== */
+
+.profile-card-container {
+  width: 100% !important;
+
+  max-width: 680px !important;
+
+  margin: 0 auto !important;
+
+  padding: 28px 36px !important;
+
+  box-sizing: border-box !important;
+
+  background-color: #1B3B32 !important;
+
+  border: 1px solid rgba(157, 200, 141, 0.35) !important;
+
+  border-radius: 22px !important;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+
+  color: #ffffff !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+}
+
+
+/* ==========================================================
+   PROFILE HEADER
+   ========================================================== */
+
+.profile-details-content {
+  width: 100% !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  align-items: center !important;
+
+  gap: 14px !important;
+}
+
+
+.profile-title-area {
+  text-align: center !important;
+
+  margin-bottom: 8px !important;
+}
+
+
+.profile-title-area h2 {
+  margin: 0 !important;
+
+  color: #ffffff !important;
+
+  font-size: 1.5rem !important;
+
+  font-weight: 800 !important;
+}
+
+
+.profile-title-area p {
+  margin: 5px 0 0 !important;
+
+  color: #CBD5E1 !important;
+
+  font-size: 0.85rem !important;
+}
+
+
+/* ==========================================================
+   PROFILE AVATAR
+   ========================================================== */
+
+.profile-avatar-box {
+  width: 104px !important;
+
+  height: 104px !important;
+
+  border-radius: 50% !important;
+
+  background-color: #9DC88D !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  font-size: 2.7rem !important;
+
+  color: #164A41 !important;
+
+  font-weight: 800 !important;
+
+  overflow: hidden !important;
+
+  border: 4px solid rgba(255, 255, 255, 0.18) !important;
+
+  box-sizing: border-box !important;
+
+  margin-bottom: 4px !important;
+}
+
+
+.profile-avatar-box img {
+  width: 100% !important;
+
+  height: 100% !important;
+
+  object-fit: cover !important;
+}
+
+
+/* ==========================================================
+   PROFILE FORM
+   ========================================================== */
+
+.profile-info-rows {
+  width: 100% !important;
+
+  max-width: 560px !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  gap: 14px !important;
+
+  margin: 8px auto 0 !important;
+}
+
+
+.form-group {
+  width: 100% !important;
+
+  margin-bottom: 12px !important;
+
+  text-align: left !important;
+}
+
+
+.form-group label {
+  display: block !important;
+
+  color: #DCE7E2 !important;
+
+  font-size: 0.78rem !important;
+
+  font-weight: 700 !important;
+
+  margin-bottom: 6px !important;
+}
+
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group input[type="file"] {
+  width: 100% !important;
+
+  min-height: 46px !important;
+
+  padding: 11px 15px !important;
+
+  box-sizing: border-box !important;
+
+  border-radius: 12px !important;
+
+  border: 1px solid #D1D5DB !important;
+
+  outline: none !important;
+
+  background-color: #ffffff !important;
+
+  color: #111827 !important;
+
+  font-size: 0.9rem !important;
+}
+
+
+/* Disabled email */
+
+.form-group input:disabled {
+  background-color: #E2E8F0 !important;
+
+  color: #64748B !important;
+
+  cursor: not-allowed !important;
+}
+
+
+/* ==========================================================
+   SAVE BUTTON
+   ========================================================== */
+
+.btn-save {
+  width: 100% !important;
+
+  min-height: 48px !important;
+
+  padding: 12px 18px !important;
+
+  margin-top: 6px !important;
+
+  background-color: #9DC88D !important;
+
+  color: #164A41 !important;
+
+  border: none !important;
+
+  border-radius: 12px !important;
+
+  font-size: 0.95rem !important;
+
+  font-weight: 800 !important;
+
+  cursor: pointer !important;
+}
+
+
+.btn-save:hover {
+  background-color: #8FB82C !important;
+}
+
+
+/* ==========================================================
+   PROFILE BANNER
+   ========================================================== */
+
+.profile-banner-card {
+  width: 100% !important;
+
+  max-width: 760px !important;
+
+  margin: 0 auto !important;
+
+  padding: 28px 34px !important;
+
+  box-sizing: border-box !important;
+
+  background-color: #1B3B32 !important;
+
+  border: 1px solid rgba(157, 200, 141, 0.35) !important;
+
+  border-radius: 22px !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  align-items: center !important;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+}
+
+
+/* ==========================================================
+   SETTINGS
+   ========================================================== */
+
+.settings-container {
+  width: 100% !important;
+
+  max-width: 760px !important;
+
+  margin: 0 auto !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  gap: 18px !important;
+
+  padding-bottom: 30px !important;
+}
+
+
+.settings-heading {
+  font-size: 0.75rem !important;
+
+  font-weight: 800 !important;
+
+  color: #9DC88D !important;
+
+  letter-spacing: 0.5px !important;
+
+  margin: 4px 0 4px !important;
+}
+
+
+.settings-card {
+  width: 100% !important;
+
+  box-sizing: border-box !important;
+
+  background-color: #1B3B32 !important;
+
+  border: 1px solid rgba(157, 200, 141, 0.3) !important;
+
+  border-radius: 18px !important;
+
+  padding: 8px 20px !important;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+
+.settings-row {
+  display: flex !important;
+
+  justify-content: space-between !important;
+
+  align-items: center !important;
+
+  gap: 20px !important;
+
+  padding: 14px 0 !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+
+.settings-row:last-child {
+  border-bottom: none !important;
+}
+
+
+.settings-row-title {
+  color: #ffffff !important;
+
+  font-size: 0.95rem !important;
+
+  font-weight: 700 !important;
+}
+
+
+.settings-row-sub {
+  color: #CBD5E1 !important;
+
+  font-size: 0.8rem !important;
+
+  margin-top: 3px !important;
+}
+
+
+/* ==========================================================
+   NO UNWANTED THEME ANIMATION
+   ========================================================== */
+
+.app-shell,
+.icon-sidebar,
+.icon-nav-link,
+.main-content,
+.profile-card-container,
+.profile-banner-card,
+.settings-card {
+  transition: none !important;
+
+  animation: none !important;
+}

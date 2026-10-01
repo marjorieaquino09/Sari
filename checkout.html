@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Checkout</title>
+  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
+  <link rel="stylesheet" href="css/inventory.css?v=10.0">
+  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="css/checkout.css?v=10.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  
+  <link rel="stylesheet" href="css/style.css?v=10.0">
+</head>
+<body class="app-page">
+
+  <div class="app-shell">
+
+   
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo">Sari</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
+          <span class="sidebar-label">Home</span>
+        </a>
+        <a href="inventory.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-box"></i></span>
+          <span class="sidebar-label">Inventory</span>
+        </a>
+        <a href="checkout.html" class="sidebar-link active">
+          <span class="sidebar-icon"><i class="fa-solid fa-cash-register"></i></span>
+          <span class="sidebar-label">Checkout</span>
+        </a>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="credit-ledger.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span class="sidebar-label">Credit Ledger</span>
+        </a>
+        <a href="transactions.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-receipt"></i></span>
+          <span class="sidebar-label">Transactions</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-user"></i></span>
+          <span class="sidebar-label">My Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <button id="logoutBtn" class="sidebar-logout" style="background:none; border:none; cursor:pointer; width:100%; text-align:left; color:inherit;">
+        <span class="sidebar-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+        <span class="sidebar-label">Log Out</span>
+      </button>
+    </aside>
+
+    
+    <main class="main-content">
+
+      <div class="topbar-row">
+        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="topbar">
+          <div class="topbar-left">
+            <button class="topbar-home-btn" type="button">Checkout</button>
+          </div>
+
+          
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="notifications.html" id="notificationBtn" style="background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s;" title="Notifications">
+              <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+            </a>
+
+            <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
+              <span class="topbar-avatar" id="avatarContainer"></span>
+              <span id="topbarStoreName">Loading...</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pos-layout">
+
+        
+        <section class="pos-products">
+          
+          
+          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 0;">
+            <div class="inventory-search pos-search" style="flex: 1; display: flex; align-items: center; background: #fff; border-radius: 20px; padding: 0 16px;">
+              <i class="fa-solid fa-magnifying-glass" style="color: #64748b; margin-right: 10px;"></i>
+              <input type="text" id="posSearch" placeholder="Search product name or scan barcode..." style="border: none; outline: none; width: 100%; padding: 12px 0; background: transparent; font-size: 0.95rem;">
+            </div>
+            
+            
+            <button type="button" id="startScanBtn" style="background: #ffffff; border: none; width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.15s ease;" title="Scan Barcode">
+              <i class="fa-solid fa-barcode" style="font-size: 1.2rem; color: #164a41;"></i>
+            </button>
+          </div>
+
+          
+          <div id="reader" style="width: 100%; max-width: 400px; margin: 15px auto 0 auto; display: none; border-radius: 12px; overflow: hidden; background: #000;"></div>
+
+          <div class="pos-categories" id="categoryContainer" style="margin-top: 16px;">
+            <button class="pos-category active" type="button" data-category="All">All</button>
+            <button class="pos-category" type="button" data-category="Beverage">Beverages</button>
+            <button class="pos-category" type="button" data-category="Chips">Snacks</button>
+            <button class="pos-category" type="button" data-category="Household">Household</button>
+            <button class="pos-category" type="button" data-category="Canned">Canned</button>
+            <button class="pos-category" type="button" data-category="Alcohol">Alcohol</button>
+          </div>
+
+          <div class="pos-grid" id="posGrid">
+            <p style="grid-column: 1 / -1; color: #fff; text-align: center; padding: 20px;">Naglo-load ng mga produkto...</p>
+          </div>
+        </section>
+
+        
+        <aside class="pos-cart">
+          <div class="pos-cart-header">
+            <span>Cart</span>
+            <button class="pos-clear-cart" type="button" id="clearCartBtn">Clear Cart</button>
+          </div>
+
+          <div class="pos-cart-items" id="cartContainer">
+            <p style="text-align:center; color:#9aa9a0; font-size:13px; margin: 20px 0;">Cart is empty</p>
+          </div>
+
+          <div class="pos-summary">
+            <div class="pos-summary-row">
+              <span>Subtotal</span>
+              <span id="subtotalText">₱0.00</span>
+            </div>
+            <div class="pos-summary-row total">
+              <span>Total Due</span>
+              <span id="totalText">₱0.00</span>
+            </div>
+          </div>
+
+          <div class="pos-payment-methods">
+            <button class="pos-payment-btn active" type="button" id="payCashBtn">Cash</button>
+            <button class="pos-payment-btn" type="button" id="payCreditBtn">Credit</button>
+          </div>
+
+          <div id="creditCustomerDiv" style="margin-top: 12px; display: none;">
+            <label for="customerNameInput" style="display: block; font-size: 0.85rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">Debtor / Customer Name</label>
+            <input type="text" id="customerNameInput" placeholder="Enter customer name" style="width: 100%; padding: 8px 12px; border-radius: 12px; border: 1px solid #cbd5e1; font-size: 0.9rem; outline: none; background: #ffffff; color: #000;">
+          </div>
+
+          <button class="pos-complete-btn" id="completeSaleBtn" type="button" style="margin-top: 15px;">Complete Sale</button>
+        </aside>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/script.js?v=10.0"></script>
+  <script type="module" src="js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Credit Ledger</title>
+  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
+  <link rel="stylesheet" href="css/inventory.css?v=10.0">
+  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css?v=10.0">
+</head>
+<body class="app-page">
+
+  <div class="app-shell">
+
+    
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo">Sari</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
+          <span class="sidebar-label">Home</span>
+        </a>
+        <a href="inventory.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-box"></i></span>
+          <span class="sidebar-label">Inventory</span>
+        </a>
+        <a href="checkout.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-cash-register"></i></span>
+          <span class="sidebar-label">Checkout</span>
+        </a>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="credit-ledger.html" class="sidebar-link active">
+          <span class="sidebar-icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span class="sidebar-label">Credit Ledger</span>
+        </a>
+        <a href="transactions.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-receipt"></i></span>
+          <span class="sidebar-label">Transactions</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-user"></i></span>
+          <span class="sidebar-label">My Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <button id="logoutBtn" class="sidebar-logout" style="background:none; border:none; cursor:pointer; width:100%; text-align:left; color:inherit;">
+        <span class="sidebar-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+        <span class="sidebar-label">Log Out</span>
+      </button>
+    </aside>
+
+    
+    <main class="main-content">
+
+      <div class="topbar-row">
+        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="topbar">
+          <div class="topbar-left">
+            <button class="topbar-home-btn" type="button">Credit Ledger</button>
+          </div>
+
+          <!-- KANANG BAHAGI: Notification Icon at Profile -->
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="notifications.html" id="notificationBtn" style="background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s;" title="Notifications">
+              <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+            </a>
+
+            <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
+              <span class="topbar-avatar" id="avatarContainer"></span>
+              <span id="topbarStoreName">Loading...</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ledger-layout">
+
+        <!-- LEFT: CUSTOMER TABLE -->
+        <section class="inventory-table-panel ledger-table-panel">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Credit</th>
+                <th>Limit</th>
+                <th>Last Payment</th>
+                <th>Status</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ledgerTableBody">
+              <tr>
+                <td colspan="7" style="text-align: center; color: #7c8b82; padding: 24px;">Naglo-load ng utang records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- RIGHT: SEARCH + STATS -->
+        <aside class="ledger-rail">
+          <div class="inventory-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchCustomerInput" placeholder="Search customers...">
+          </div>
+
+          <div class="ledger-stat-card">
+            <div class="label">Total Owed This Month</div>
+            <div class="value" id="statTotalOwed">₱0.00</div>
+          </div>
+
+          <div class="ledger-stat-card">
+            <span class="ledger-stat-icon purple"><i class="fa-solid fa-users"></i></span>
+            <div class="inventory-stat-text">
+              <div class="label">Customers on Credit</div>
+              <div class="value" id="statCustomerCount">0</div>
+            </div>
+          </div>
+
+          <div class="ledger-stat-card">
+            <span class="ledger-stat-icon red"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div class="inventory-stat-text">
+              <div class="label">Overdue Accounts</div>
+              <div class="value" id="statOverdueCount">0</div>
+            </div>
+          </div>
+
+          <div class="ledger-stat-card">
+            <span class="ledger-stat-icon green"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+            <div class="inventory-stat-text">
+              <div class="label">Collected This Month</div>
+              <div class="value" id="statCollectedThisMonth">₱0.00</div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/script.js?v=10.0"></script>
+  
+  <script type="module" src="js/credit-ledger.js"></script>
+</body>
+</html>

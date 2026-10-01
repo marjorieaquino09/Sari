@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Settings</title>
+  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
+  <link rel="stylesheet" href="css/inventory.css?v=10.0">
+  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="css/profile.css?v=10.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css?v=10.0">
+</head>
+<body class="app-page">
+
+  <div class="app-shell">
+
+    
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo">Sari</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
+          <span class="sidebar-label">Home</span>
+        </a>
+        <a href="inventory.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-box"></i></span>
+          <span class="sidebar-label">Inventory</span>
+        </a>
+        <a href="checkout.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-cash-register"></i></span>
+          <span class="sidebar-label">Checkout</span>
+        </a>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="credit-ledger.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span class="sidebar-label">Credit Ledger</span>
+        </a>
+        <a href="transactions.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-receipt"></i></span>
+          <span class="sidebar-label">Transactions</span>
+        </a>
+        <a href="settings.html" class="sidebar-link active">
+          <span class="sidebar-icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-user"></i></span>
+          <span class="sidebar-label">My Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <button id="logoutBtn" class="sidebar-logout" style="background:none; border:none; cursor:pointer; width:100%; text-align:left; color:inherit;">
+        <span class="sidebar-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+        <span class="sidebar-label">Log Out</span>
+      </button>
+    </aside>
+
+    <main class="main-content">
+
+      <div class="topbar-row">
+        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="topbar">
+          <div class="topbar-left">
+            <button class="topbar-home-btn" type="button">Settings</button>
+          </div>
+
+          <!-- KANANG BAHAGI: Notification Icon at Profile -->
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="notifications.html" id="notificationBtn" style="background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s;" title="Notifications">
+              <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+            </a>
+
+            <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
+              <span class="topbar-avatar" id="topbarAvatarContainer"></span>
+              <span id="topbarStoreName">Loading...</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-container">
+
+       
+        <div class="settings-section">
+          <div class="settings-heading">ACCOUNT</div>
+          <div class="settings-card">
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-title">Change Password</div>
+                <div class="settings-row-sub">Send a password reset link to your email</div>
+              </div>
+              <button class="settings-btn" id="changePasswordBtn" type="button">Change</button>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="settings-section">
+          <div class="settings-heading">APPEARANCE & THEME</div>
+          <div class="settings-card">
+            <div class="settings-row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+              <div>
+                <div class="settings-row-title">App Color Theme</div>
+                <div class="settings-row-sub">Pumili ng kulay na komportable at hindi masakit sa mata</div>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; margin-top: 5px;">
+                <button type="button" onclick="changeTheme('default')" style="background: #164A41; border: 2px solid #9DC88D; color: white; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; flex: 1; min-width: 120px;">Default Green</button>
+                <button type="button" onclick="changeTheme('nordic')" style="background: #29313a; border: 2px solid #f472b6; color: white; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; flex: 1; min-width: 120px;">Nordic</button>
+                <button type="button" onclick="changeTheme('the-best')" style="background: #1C332B; border: 2px solid #F59E0B; color: white; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; flex: 1; min-width: 120px;">Emerald Gold</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+        <div class="settings-section">
+          <div class="settings-heading">STORE PREFERENCES</div>
+          <div class="settings-card">
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-title">Currency</div>
+                <div class="settings-row-sub">Used across all transactions</div>
+              </div>
+              <div class="settings-value">₱ PHP</div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-title">Tax Rate (VAT)</div>
+                <div class="settings-row-sub">Applied to every sale</div>
+              </div>
+              <div class="settings-value">12%</div>
+            </div>
+
+            <!-- Low Stock Threshold -->
+            <form id="settingsForm" class="settings-row" style="align-items: center;">
+              <div>
+                <div class="settings-row-title">Low Stock Threshold</div>
+                <div class="settings-row-sub">Get alerted below this quantity</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <input type="number" id="low_stock_threshold" value="5" min="1" style="width: 65px; padding: 6px 8px; border-radius: 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: 700;">
+                <button type="submit" id="saveThresholdBtn" class="settings-btn">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        
+        <div class="settings-section">
+          <div class="settings-heading">NOTIFICATIONS</div>
+          <div class="settings-card">
+            <div class="settings-row" style="align-items: center;">
+              <div>
+                <div class="settings-row-title">Push Notifications</div>
+                <div class="settings-row-sub">Get real-time alerts on this device</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="pushNotifToggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="settings-row" style="align-items: center;">
+              <div>
+                <div class="settings-row-title">Low Stock Alerts</div>
+                <div class="settings-row-sub">Notify when items run low</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="lowStockAlertToggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="settings-section">
+          <div class="settings-heading">ABOUT</div>
+          <div class="settings-card">
+            <div class="settings-row" style="cursor:pointer;" id="aboutBtn">
+              <div>
+                <div class="settings-row-title">Help &amp; Support</div>
+                <div class="settings-row-sub">FAQs, contact us, terms of service</div>
+              </div>
+              <i class="fa-solid fa-chevron-right" style="color:#7c8b82;"></i>
+            </div>
+          </div>
+        </div>
+
+        <button class="logout-btn-full" id="logoutBtnFull" type="button" style="border:none; cursor:pointer;">Log Out</button>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/script.js?v=10.0"></script>
+  <!-- Firebase Settings Script -->
+  <script type="module" src="js/settings.js"></script>
+</body>
+</html>

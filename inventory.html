@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Inventory</title>
+  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
+  <link rel="stylesheet" href="css/inventory.css?v=10.0">
+  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Barcode Scanner Library CDN -->
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  
+  <link rel="stylesheet" href="css/style.css?v=10.0">
+</head>
+<body class="app-page">
+
+  <div class="app-shell">
+
+    <!-- STANDARDIZED FULL SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo">Sari</a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
+          <span class="sidebar-label">Home</span>
+        </a>
+        <a href="inventory.html" class="sidebar-link active">
+          <span class="sidebar-icon"><i class="fa-solid fa-box"></i></span>
+          <span class="sidebar-label">Inventory</span>
+        </a>
+        <a href="checkout.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-cash-register"></i></span>
+          <span class="sidebar-label">Checkout</span>
+        </a>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <a href="credit-ledger.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span class="sidebar-label">Credit Ledger</span>
+        </a>
+        <a href="transactions.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-receipt"></i></span>
+          <span class="sidebar-label">Transactions</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-gear"></i></span>
+          <span class="sidebar-label">Settings</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-icon"><i class="fa-solid fa-user"></i></span>
+          <span class="sidebar-label">My Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <button id="logoutBtn" class="sidebar-logout" style="background:none; border:none; cursor:pointer; width:100%; text-align:left; color:inherit;">
+        <span class="sidebar-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+        <span class="sidebar-label">Log Out</span>
+      </button>
+    </aside>
+
+    
+    <main class="main-content inv-main-content">
+
+      <!-- TOPBAR -->
+      <div class="topbar-row inv-topbar-row">
+        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="topbar inv-topbar">
+          <div class="topbar-left">
+            <button class="topbar-home-btn" type="button">Inventory</button>
+          </div>
+
+         
+          <div class="inv-topbar-right">
+            <a href="notifications.html" id="notificationBtn" class="inv-notif-btn" title="Notifications">
+              <i class="fa-solid fa-bell"></i>
+            </a>
+
+            <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
+              <span class="topbar-avatar" id="avatarContainer"></span>
+              <span id="topbarStoreName">Loading...</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="inv-search-category-row">
+
+        <!-- Search Bar at Scanner Button -->
+        <div class="inv-search-wrapper">
+          <div class="search-box inv-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="inventorySearch" placeholder="Search product name or scan barcode...">
+          </div>
+
+          
+          <button type="button" id="startScanBtn" class="inv-scan-btn" title="Scan Barcode">
+            <i class="fa-solid fa-barcode"></i>
+          </button>
+        </div>
+
+        <select id="categoryFilter" class="inv-category-select">
+          <option value="">All Categories</option>
+          <option value="Household">Household</option>
+          <option value="Beverage">Beverage</option>
+          <option value="Canned">Canned</option>
+          <option value="Alcohol">Alcohol</option>
+          <option value="Coffee & Tea">Coffee & Tea</option>
+          <option value="Biscuits">Biscuits</option>
+          <option value="Chips">Chips</option>
+          <option value="Condiments">Condiments</option>
+          <option value="Noodles">Noodles</option>
+        </select>
+      </div>
+
+      <!-- Barcode reader container -->
+      <div id="reader" class="inv-barcode-reader"></div>
+
+      <div class="inv-grid-layout">
+
+        <!-- LEFT: SUMMARY + TABLE -->
+        <div>
+
+          <div class="inv-summary-cards">
+            <div class="inv-summary-card">
+              <div class="inv-card-icon green"><i class="fa-solid fa-box"></i></div>
+              <div class="inv-card-label">TOTAL PRODUCTS</div>
+              <div id="statTotalProducts" class="inv-card-value">0</div>
+            </div>
+
+            <div class="inv-summary-card">
+              <div class="inv-card-icon yellow"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div class="inv-card-label">LOW STOCK</div>
+              <div id="statLowStock" class="inv-card-value">0</div>
+            </div>
+
+            <div class="inv-summary-card">
+              <div class="inv-card-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+              <div class="inv-card-label">OUT OF STOCK</div>
+              <div id="statOutOfStock" class="inv-card-value">0</div>
+            </div>
+
+            <div class="inv-summary-card">
+              <div class="inv-card-icon emerald"><i class="fa-solid fa-sack-dollar"></i></div>
+              <div class="inv-card-label">INVENTORY VALUE</div>
+              <div id="statInventoryValue" class="inv-card-value-large">₱0.00</div>
+            </div>
+          </div>
+
+          <!-- TABLE -->
+          <div class="inv-table-container">
+            <table class="inv-table">
+              <thead>
+                <tr>
+                  <th style="padding: 10px;">PRODUCT</th>
+                  <th style="padding: 10px;">CATEGORY</th>
+                  <th style="padding: 10px;">STOCK</th>
+                  <th style="padding: 10px;">PRICE</th>
+                  <th style="padding: 10px;">STATUS</th>
+                  <th style="padding: 10px; text-align: center;">ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryTableBody">
+                <tr>
+                  <td colspan="6" class="inv-table-loading">Naglo-load ng mga produkto...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- RIGHT: ADD PRODUCT FORM -->
+        <div class="inv-form-card">
+          <h3 class="inv-form-title">Add New Product</h3>
+
+          <form id="addProductForm">
+            <div class="inv-form-group">
+              <label class="inv-form-label">Product Name</label>
+              <input type="text" id="addName" placeholder="e.g. Lucky Me Pancit Canton" required class="inv-form-input">
+            </div>
+
+            <div class="inv-form-group">
+              <label class="inv-form-label">Barcode Number</label>
+              <input type="text" id="addBarcode" placeholder="e.g. 4800016643210" class="inv-form-input">
+            </div>
+
+            <div class="inv-form-group">
+              <label class="inv-form-label">Category</label>
+              <select id="addCategory" required class="inv-form-input">
+                <option value="">Select Category</option>
+                <option value="Household">Household</option>
+                <option value="Beverage">Beverage</option>
+                <option value="Canned">Canned</option>
+                <option value="Alcohol">Alcohol</option>
+                <option value="Coffee & Tea">Coffee & Tea</option>
+                <option value="Biscuits">Biscuits</option>
+                <option value="Chips">Chips</option>
+                <option value="Condiments">Condiments</option>
+                <option value="Noodles">Noodles</option>
+              </select>
+            </div>
+
+            <div class="inv-form-group">
+              <label class="inv-form-label">Product Image (Optional)</label>
+              <input type="file" id="addImageFile" accept="image/*" class="inv-file-input">
+            </div>
+
+            <div class="inv-form-group">
+              <label class="inv-form-label">Stock</label>
+              <input type="number" id="addStock" value="1" min="0" required class="inv-form-input">
+            </div>
+
+            <div class="inv-form-group-lg">
+              <label class="inv-form-label">Price (₱)</label>
+              <input type="number" step="0.01" id="addPrice" placeholder="0.00" required class="inv-form-input">
+            </div>
+
+            <button type="submit" id="btnSaveProduct" class="inv-submit-btn">
+              Save Product
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/script.js?v=10.0"></script>
+  <script type="module" src="js/inventory.js"></script>
+</body>
+</html>

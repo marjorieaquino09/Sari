@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+
+  <div class="form-wrapper">
+    <h1 class="brand-title">SARI<span class="dot">.</span></h1>
+    <p class="subtitle">Welcome back! Log in to manage your store.</p>
+
+    <div id="errorBox" class="error-message"></div>
+
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="loginEmail">Email Address</label>
+        <input type="email" id="loginEmail" placeholder="owner@example.com" required>
+      </div>
+
+      <div class="input-group">
+        <label for="loginPassword">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+          <i class="fa-solid fa-eye toggle-eye" id="togglePassword"></i>
+        </div>
+      </div>
+
+      <a href="#" class="forgot-link">Forgot Password?</a>
+
+      <button type="submit" id="btnLogin" class="btn-login">Log In</button>
+    </form>
+
+    <p class="signup-text">
+      Don't have an account? <a href="signup.html">Sign Up</a>
+    </p>
+  </div>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

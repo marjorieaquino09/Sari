@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI - Edit Profile</title>
+  <link rel="stylesheet" href="css/profile.css?v=10.0">
+  <link rel="stylesheet" href="css/style.css?v=10.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .avatar-preview-box {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #164a41;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px auto 15px auto;
+      font-size: 32px;
+      font-weight: bold;
+      overflow: hidden;
+      border: 3px solid #a2d233;
+    }
+    .avatar-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="app-page">
+
+  <div class="app-shell">
+
+    
+    <aside class="icon-sidebar">
+      <button class="icon-sidebar-menu-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+      <a href="profile.html" class="icon-nav-link" title="Profile"><i class="fa-solid fa-user"></i></a>
+      <a href="edit-profile.html" class="icon-nav-link active" title="Edit Profile"><i class="fa-solid fa-pen"></i></a>
+      <a href="settings.html" class="icon-nav-link" title="Settings"><i class="fa-solid fa-gear"></i></a>
+      <a href="notifications.html" class="icon-nav-link" title="Notifications"><i class="fa-solid fa-bell"></i></a>
+      <a href="index.html" class="icon-nav-link" title="Home"><i class="fa-solid fa-house"></i></a>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar-row">
+        <div class="topbar">
+          <div class="topbar-left">
+            <button class="topbar-home-btn" type="button">Edit Profile</button>
+          </div>
+          <a class="topbar-store" href="profile.html">
+            <span class="topbar-avatar" id="topbarAvatarContainer"></span>
+            <span id="topbarStoreName">Loading...</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="profile-banner-card" style="max-width: 600px; margin: 30px auto; padding: 30px;">
+        <h2 style="text-align: center; color: #fff; margin-bottom: 20px;">Edit Profile Details</h2>
+
+        <form id="editProfileForm" style="display: flex; flex-direction: column; gap: 15px;">
+          
+          <div style="text-align: center;">
+            <label style="color: #cbd5e1; font-size: 13px; font-weight: 600; display: block; margin-bottom: 5px;">Profile Picture</label>
+            <div class="avatar-preview-box" id="avatarPreview">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <input type="file" id="profileImageInput" accept="image/*" style="background: #fff; padding: 8px; border-radius: 10px; width: 100%; max-width: 320px;">
+          </div>
+
+          <div>
+            <label style="color: #cbd5e1; font-size: 13px; font-weight: 600;">Owner Name</label>
+            <input type="text" id="fullNameInput" placeholder="Enter full name" required style="width: 100%; padding: 12px; border-radius: 10px; border: none; margin-top: 5px; font-weight: 600;">
+          </div>
+
+          <div>
+            <label style="color: #cbd5e1; font-size: 13px; font-weight: 600;">Store Name</label>
+            <input type="text" id="storeNameInput" placeholder="Enter store name" required style="width: 100%; padding: 12px; border-radius: 10px; border: none; margin-top: 5px; font-weight: 600;">
+          </div>
+
+          <div>
+            <label style="color: #cbd5e1; font-size: 13px; font-weight: 600;">Email Address</label>
+            <input type="email" id="emailInput" placeholder="Email address" readonly style="width: 100%; padding: 12px; border-radius: 10px; border: none; margin-top: 5px; background: #e2e8f0; color: #64748b; font-weight: 600; cursor: not-allowed;">
+          </div>
+
+          <div>
+            <label style="color: #cbd5e1; font-size: 13px; font-weight: 600;">Date of Birth</label>
+            <input type="date" id="dobInput" style="width: 100%; padding: 12px; border-radius: 10px; border: none; margin-top: 5px; font-weight: 600;">
+          </div>
+
+          <button type="submit" id="saveProfileBtn" style="background: #a2d233; color: #164a41; border: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 10px;">
+            Save Changes
+          </button>
+
+          <a href="profile.html" style="text-align: center; color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 14px;">Cancel</a>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/script.js?v=6.0"></script>
+
+  <script type="module" src="js/edit-profile.js"></script>
+</body>
+</html>
