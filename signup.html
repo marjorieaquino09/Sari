@@ -6,64 +6,100 @@
   <title>SARI - Sign Up</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
 </head>
-<body class="signup-page">
+<body class="login-page">
 
-  <div class="signup-card">
-    <div class="header-container">
-      <h1 class="brand-title">SARI<span class="dot">.</span></h1>
-      <span class="page-title">Sign up</span>
+  <div class="login-split-container signup-active">
+    
+    <div class="login-left-banner">
+      <div class="banner-content-box">
+        
+        <div class="banner-center-brand">
+          <div class="banner-logo-wrap">
+            <img src="assets/sari-logo.jpg" alt="SARI Logo" class="banner-logo-img">
+          </div>
+          <h1 class="banner-brand-name">SARI</h1>
+          <div class="banner-brand-subline">
+            <span class="line-deco"></span>
+            <span class="subline-text">SARI-SARI STORE</span>
+            <span class="line-deco"></span>
+          </div>
+        </div>
+        
+        <p class="banner-cursive-tagline">Everyday Essentials, Just Around the Corner.</p>
+        
+        <div class="features-row-minimal">
+          <div class="feature-item-min">
+            <div class="feat-icon-circle"><i class="fa-solid fa-basket-shopping"></i></div>
+            <span>Fresh Products</span>
+          </div>
+          <div class="feature-item-min">
+            <div class="feat-icon-circle"><i class="fa-solid fa-bolt"></i></div>
+            <span>Quick & Easy</span>
+          </div>
+          <div class="feature-item-min">
+            <div class="feat-icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
+            <span>Safe & Secure</span>
+          </div>
+          <div class="feature-item-min">
+            <div class="feat-icon-circle"><i class="fa-solid fa-heart"></i></div>
+            <span>For Our Community</span>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <form id="signupForm">
-      <div class="input-group">
-        <label for="signupFullName">Full Name</label>
-        <input type="text" id="signupFullName" placeholder="Juan Dela Cruz" required>
-      </div>
-
-      <div class="input-group">
-        <label for="signupStoreName">Store name</label>
-        <input type="text" id="signupStoreName" placeholder="Majo's Store" required>
-      </div>
-
-      <div class="input-row">
-        <div class="input-group">
-          <label for="signupEmail">Email</label>
-          <input type="email" id="signupEmail" placeholder="owner@example.com" required>
+    <div class="login-right-section">
+      <div class="form-wrapper">
+        <div class="card-logo-top">
+          <div class="card-logo-wrap">
+            <img src="assets/sari-logo.jpg" alt="SARI Logo" class="card-logo-img">
+          </div>
         </div>
+        <h2 class="welcome-title">Create Account</h2>
+        <p class="subtitle">Sign up to start managing your store.</p>
 
-        <div class="input-group">
-          <label for="signupDob">Date of Birth</label>
-          <input type="date" id="signupDob" required>
-        </div>
+        <div id="errorBox" class="error-message"></div>
+
+        <form id="signupForm">
+          <div class="input-group">
+            <label for="signupName">Store / Owner Name</label>
+            <div class="input-field-box">
+              <i class="fa-solid fa-user field-icon"></i>
+              <input type="text" id="signupName" placeholder="Juan Dela Cruz" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="signupEmail">Email Address</label>
+            <div class="input-field-box">
+              <i class="fa-solid fa-envelope field-icon"></i>
+              <input type="email" id="signupEmail" placeholder="owner@example.com" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="signupPassword">Password</label>
+            <div class="input-field-box password-wrapper">
+              <i class="fa-solid fa-lock field-icon"></i>
+              <input type="password" id="signupPassword" placeholder="Create a password" required>
+              <i class="fa-solid fa-eye toggle-eye" id="toggleSignupPassword"></i>
+            </div>
+          </div>
+
+          <button type="submit" id="btnSignup" class="btn-login">
+            <i class="fa-solid fa-user-plus"></i> Sign Up
+          </button>
+        </form>
+
+        <p class="signup-text">
+          Already have an account? <a href="login.html">Log In</a>
+        </p>
       </div>
+    </div>
 
-      <div class="input-group">
-        <label for="signupPassword">Password</label>
-        <div class="password-wrapper">
-          <input type="password" id="signupPassword" required>
-          <i class="fa-solid fa-eye-slash toggle-eye" id="togglePassword"></i>
-        </div>
-      </div>
-
-      <div class="input-group">
-        <label for="signupConfirmPassword">Confirm Password</label>
-        <div class="password-wrapper">
-          <input type="password" id="signupConfirmPassword" required>
-          <i class="fa-solid fa-eye-slash toggle-eye" id="toggleConfirmPassword"></i>
-        </div>
-      </div>
-
-      <div id="errorBox" class="error-message"></div>
-
-      <div class="button-wrapper">
-        <button type="submit" id="btnSignup" class="btn-signup">Sign Up</button>
-      </div>
-
-      <p class="signup-footer-text">
-        Already have an account? <a href="login.html">Log In</a>
-      </p>
-    </form>
   </div>
 
   <script type="module" src="js/signup.js"></script>

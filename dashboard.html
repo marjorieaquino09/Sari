@@ -4,68 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SARI - Dashboard</title>
-  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
-  <link rel="stylesheet" href="css/inventory.css?v=10.0">
-  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=14.0">
+  <link rel="stylesheet" href="css/inventory.css?v=14.0">
+  <link rel="stylesheet" href="css/extra.css?v=14.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
-    .custom-chart-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 30px;
-      height: 180px;
-      padding: 20px 10px 10px 10px;
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .custom-bar-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    .stat-card, .panel {
+      animation: fadeSlideUp 0.5s ease-out forwards;
+    }
+
+    .chart-box-wrapper {
       position: relative;
-    }
-    .custom-bars-wrapper {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-      height: 130px;
-    }
-    .custom-bar {
-      width: 22px;
-      border-radius: 6px 6px 0 0;
-      transition: height 0.3s ease;
-    }
-    .custom-bar.revenue { background: #a2d233; }
-    .custom-bar.profit { background: #164a41; }
-    .custom-bar-label {
-      margin-top: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-    }
-    .custom-bar-value {
-      position: absolute;
-      top: -22px;
-      font-size: 11px;
-      font-weight: bold;
-      color: #a2d233;
-      white-space: nowrap;
+      width: 100%;
+      height: 260px;
     }
   </style>
   
-  <link rel="stylesheet" href="css/style.css?v=10.0">
+  <link rel="stylesheet" href="css/style.css?v=14.0">
 </head>
 <body class="app-page">
 
   <div class="app-shell">
 
-    
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-top">
-        <a href="index.html" class="sidebar-logo">Sari</a>
+        <a href="homepage.html" class="sidebar-logo">Sari</a>
       </div>
 
       <nav class="sidebar-nav">
-        <a href="index.html" class="sidebar-link">
+        <a href="homepage.html" class="sidebar-link">
           <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
           <span class="sidebar-label">Home</span>
         </a>
@@ -107,22 +83,18 @@
       </button>
     </aside>
 
-    
     <main class="main-content">
 
       <div class="topbar-row">
-        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
-          <i class="fa-solid fa-bars"></i>
-        </button>
         <div class="topbar">
           <div class="topbar-left">
             <button class="topbar-home-btn" type="button">Dashboard</button>
           </div>
 
-          <!-- KANANG BAHAGI: Notification Icon at Profile -->
           <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="notifications.html" id="notificationBtn" style="background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s;" title="Notifications">
+            <a href="notifications.html" id="notificationBtn" style="position: relative; background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;" title="Notifications">
               <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+              <span id="notifBadge" style="display: none; position: absolute; top: -2px; right: -2px; background: #ef4444; color: #ffffff; font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 10px; border: 2px solid #111d17; min-width: 18px; text-align: center;">0</span>
             </a>
 
             <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
@@ -133,6 +105,7 @@
         </div>
       </div>
 
+     
       <section class="stat-cards">
         <div class="stat-card">
           <div class="stat-label">TOTAL REVENUE (30D)</div>
@@ -156,49 +129,30 @@
         </div>
       </section>
 
+      
       <section class="dashboard-row">
+        
         <div class="panel panel-tinted chart-panel">
           <div class="panel-header">
-            <span class="panel-title">Revenue vs. Profit Trend</span>
-            <span class="change-range"><span class="dot" style="background:#a2d233;"></span> Revenue &nbsp;&nbsp; <span class="dot" style="background:#164a41;"></span> Profit</span>
+            <span class="panel-title">Revenue &amp; Profit Trend (2026)</span>
           </div>
-
-          <div class="custom-chart-container" id="chartContainer">
-            <p style="color:#fff; text-align:center;">Naglo-load ng analytics...</p>
+          <div class="chart-box-wrapper">
+            <canvas id="trendChartCanvas"></canvas>
           </div>
         </div>
 
-        <div class="panel">
+      
+        <div class="panel panel-tinted">
           <div class="panel-header">
             <span class="panel-title">Sales by Category</span>
           </div>
-          <div class="category-bar-row">
-            <div class="category-bar-label">
-              <span>Beverages</span><span id="bevPctText">0%</span>
-            </div>
-            <div class="category-bar-track"><div class="category-bar-fill" id="bevBarFill" style="width: 0%; background:#4a9c62;"></div></div>
-          </div>
-          <div class="category-bar-row">
-            <div class="category-bar-label">
-              <span>Snacks &amp; Noodles</span><span id="snacksPctText">0%</span>
-            </div>
-            <div class="category-bar-track"><div class="category-bar-fill" id="snacksBarFill" style="width: 0%; background:#e29a33;"></div></div>
-          </div>
-          <div class="category-bar-row">
-            <div class="category-bar-label">
-              <span>Household</span><span id="housePctText">0%</span>
-            </div>
-            <div class="category-bar-track"><div class="category-bar-fill" id="houseBarFill" style="width: 0%; background:#3f6fa8;"></div></div>
-          </div>
-          <div class="category-bar-row">
-            <div class="category-bar-label">
-              <span>Others</span><span id="otherPctText">0%</span>
-            </div>
-            <div class="category-bar-track"><div class="category-bar-fill" id="otherBarFill" style="width: 0%; background:#7a5cd6;"></div></div>
+          <div class="chart-box-wrapper" style="display:flex; justify-content:center; align-items:center;">
+            <canvas id="categoryChartCanvas"></canvas>
           </div>
         </div>
       </section>
 
+      
       <section class="dashboard-row low-stock-row">
         <div class="panel">
           <div class="panel-header">
@@ -227,14 +181,14 @@
           </div>
           <div class="transaction-row">
             <div class="transaction-left">
-              <span class="transaction-icon" style="background:#4a9c62;"></span>
+              <span class="transaction-icon" style="background:#4ade80;"></span>
               <span class="transaction-meta">Cash</span>
             </div>
             <span class="transaction-amount" id="cashPctText">0.0%</span>
           </div>
           <div class="transaction-row">
             <div class="transaction-left">
-              <span class="transaction-icon" style="background:#e29a33;"></span>
+              <span class="transaction-icon" style="background:#fde047;"></span>
               <span class="transaction-meta">Credit</span>
             </div>
             <span class="transaction-amount" id="creditPctText">0.0%</span>
@@ -245,8 +199,7 @@
     </main>
   </div>
 
-  <script src="js/script.js?v=10.0"></script>
-
-  <script type="module" src="js/dashboard.js"></script>
+  <script src="js/script.js?v=14.0" type="module"></script>
+  <script type="module" src="js/dashboard.js?v=14.0"></script>
 </body>
 </html>

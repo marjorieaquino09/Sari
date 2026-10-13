@@ -1,12 +1,10 @@
-
 import { db, auth } from "./firebase-config.js";
 import { checkAuth, logoutUser } from "./auth.js";
-import { doc, getDoc, updateDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { doc, getDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 let currentUserId = null;
 let userEmail = "";
-
 
 checkAuth(async (user) => {
   currentUserId = user.uid;
@@ -18,22 +16,9 @@ checkAuth(async (user) => {
 
     if (userSnap.exists()) {
       const data = userSnap.data();
-      
-      
-      const storeNameEl = document.getElementById("topbarStoreName");
-      if (storeNameEl) storeNameEl.innerText = data.store_name || "My Store";
-      
-      const topbarAvatar = document.getElementById("topbarAvatarContainer");
-      if (topbarAvatar) {
-        if (data.profile_image) {
-          topbarAvatar.innerHTML = `<img src="${data.profile_image}" class="topbar-avatar" style="object-fit:cover;" alt="Avatar">`;
-        } else {
-          const initial = (data.full_name || "U").charAt(0).toUpperCase();
-          topbarAvatar.innerText = initial;
-        }
-      }
 
-    
+      // Ang avatar at pangalan ng store sa topbar ay hinahawakan na ng topbar.js
+
       if (data.low_stock_threshold !== undefined) {
         document.getElementById("low_stock_threshold").value = data.low_stock_threshold;
       }
@@ -48,7 +33,6 @@ checkAuth(async (user) => {
     console.error("Error loading settings:", err);
   }
 });
-
 
 document.getElementById("settingsForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -65,7 +49,6 @@ document.getElementById("settingsForm").addEventListener("submit", async (e) => 
       updated_at: serverTimestamp()
     });
 
-    
     btn.disabled = false;
     btn.innerText = "Save";
 
@@ -77,7 +60,6 @@ document.getElementById("settingsForm").addEventListener("submit", async (e) => 
     alert("Failed to save settings: " + err.message);
   }
 });
-
 
 async function saveTogglePreference(key, value) {
   try {
@@ -99,7 +81,6 @@ document.getElementById("lowStockAlertToggle").addEventListener("change", (e) =>
   saveTogglePreference("low_stock_alerts", e.target.checked);
 });
 
-
 document.getElementById("changePasswordBtn").addEventListener("click", async () => {
   if (userEmail) {
     try {
@@ -112,7 +93,6 @@ document.getElementById("changePasswordBtn").addEventListener("click", async () 
     alert("User email not found.");
   }
 });
-
 
 document.getElementById("aboutBtn").addEventListener("click", () => {
   alert("Sari App v1.0 — Firebase Powered Edition");

@@ -4,25 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SARI - Transactions</title>
-  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
-  <link rel="stylesheet" href="css/inventory.css?v=10.0">
-  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=12.0">
+  <link rel="stylesheet" href="css/inventory.css?v=12.0">
+  <link rel="stylesheet" href="css/extra.css?v=12.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <link rel="stylesheet" href="css/style.css?v=10.0">
+  <link rel="stylesheet" href="css/style.css?v=12.0">
 </head>
 <body class="app-page">
 
   <div class="app-shell">
 
-   
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-top">
-        <a href="index.html" class="sidebar-logo">Sari</a>
+        <a href="homepage.html" class="sidebar-logo">Sari</a>
       </div>
 
       <nav class="sidebar-nav">
-        <a href="index.html" class="sidebar-link">
+        <a href="homepage.html" class="sidebar-link">
           <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
           <span class="sidebar-label">Home</span>
         </a>
@@ -64,13 +62,9 @@
       </button>
     </aside>
 
-    
     <main class="main-content">
 
       <div class="topbar-row">
-        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
-          <i class="fa-solid fa-bars"></i>
-        </button>
         <div class="topbar">
           <div class="topbar-left">
             <button class="topbar-home-btn" type="button">Transactions</button>
@@ -79,10 +73,10 @@
             </button>
           </div>
 
-         
           <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="notifications.html" id="notificationBtn" style="background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s;" title="Notifications">
+            <a href="notifications.html" id="notificationBtn" style="position: relative; background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;" title="Notifications">
               <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+              <span id="notifBadge" style="display: none; position: absolute; top: -2px; right: -2px; background: #ef4444; color: #ffffff; font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 10px; border: 2px solid #111d17; min-width: 18px; text-align: center;">0</span>
             </a>
 
             <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
@@ -93,7 +87,6 @@
         </div>
       </div>
 
-     
       <section class="txn-summary-row" style="display: flex; gap: 15px; margin-bottom: 25px;">
         <div class="txn-summary-card" style="flex: 1; background: #fff; padding: 16px; border-radius: 16px; display: flex; align-items: center; gap: 14px;">
           <span class="txn-summary-icon purple" style="width: 40px; height: 40px; background: #f3e8ff; color: #7e22ce; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-wallet"></i></span>
@@ -121,7 +114,6 @@
         </div>
       </section>
 
-      
       <section class="inventory-table-panel" style="background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
         <table class="inventory-table" style="width: 100%; border-collapse: collapse;">
           <thead>
@@ -144,7 +136,6 @@
     </main>
   </div>
 
-
   <div id="receiptModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
     <div style="background:#fff; padding:28px; border-radius:12px; width:320px; color:#333; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: monospace;">
       <div style="text-align:center; border-bottom: 2px dashed #ccc; padding-bottom: 12px; margin-bottom: 12px;">
@@ -166,7 +157,7 @@
         </div>
         <div style="display:flex; justify-content:space-between;">
           <span>Date:</span>
-          <strong id="modalDate">Sep 13, 2026</strong>
+          <strong id="modalDate">Oct 11, 2026</strong>
         </div>
       </div>
       <div style="border-top: 2px dashed #ccc; margin: 14px 0; padding-top: 10px; display:flex; justify-content:space-between; font-size:15px;">
@@ -180,8 +171,7 @@
     </div>
   </div>
 
-  <script src="js/script.js?v=10.0"></script>
-  <!-- Firebase Transactions Logic -->
-  <script type="module" src="js/transactions.js"></script>
+  <script src="js/script.js?v=11.0" type="module"></script>
+  <script type="module" src="js/transactions.js?v=11.0"></script>
 </body>
 </html>

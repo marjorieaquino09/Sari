@@ -4,26 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SARI - Settings</title>
-  <link rel="stylesheet" href="css/dashboard.css?v=10.0">
-  <link rel="stylesheet" href="css/inventory.css?v=10.0">
-  <link rel="stylesheet" href="css/extra.css?v=10.0">
-  <link rel="stylesheet" href="css/profile.css?v=10.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=12.0">
+  <link rel="stylesheet" href="css/inventory.css?v=12.0">
+  <link rel="stylesheet" href="css/extra.css?v=12.0">
+  <link rel="stylesheet" href="css/profile.css?v=12.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <link rel="stylesheet" href="css/style.css?v=10.0">
+  <link rel="stylesheet" href="css/style.css?v=12.0">
 </head>
 <body class="app-page">
 
   <div class="app-shell">
 
-    
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-top">
-        <a href="index.html" class="sidebar-logo">Sari</a>
+        <a href="homepage.html" class="sidebar-logo">Sari</a>
       </div>
 
       <nav class="sidebar-nav">
-        <a href="index.html" class="sidebar-link">
+        <a href="homepage.html" class="sidebar-link">
           <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
           <span class="sidebar-label">Home</span>
         </a>
@@ -68,18 +66,15 @@
     <main class="main-content">
 
       <div class="topbar-row">
-        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
-          <i class="fa-solid fa-bars"></i>
-        </button>
         <div class="topbar">
           <div class="topbar-left">
             <button class="topbar-home-btn" type="button">Settings</button>
           </div>
 
-          <!-- KANANG BAHAGI: Notification Icon at Profile -->
           <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="notifications.html" id="notificationBtn" style="background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s;" title="Notifications">
+            <a href="notifications.html" id="notificationBtn" style="position: relative; background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;" title="Notifications">
               <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+              <span id="notifBadge" style="display: none; position: absolute; top: -2px; right: -2px; background: #ef4444; color: #ffffff; font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 10px; border: 2px solid #111d17; min-width: 18px; text-align: center;">0</span>
             </a>
 
             <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
@@ -92,7 +87,6 @@
 
       <div class="settings-container">
 
-       
         <div class="settings-section">
           <div class="settings-heading">ACCOUNT</div>
           <div class="settings-card">
@@ -106,7 +100,6 @@
           </div>
         </div>
 
-        
         <div class="settings-section">
           <div class="settings-heading">APPEARANCE & THEME</div>
           <div class="settings-card">
@@ -124,7 +117,6 @@
           </div>
         </div>
 
-       
         <div class="settings-section">
           <div class="settings-heading">STORE PREFERENCES</div>
           <div class="settings-card">
@@ -143,7 +135,6 @@
               <div class="settings-value">12%</div>
             </div>
 
-            <!-- Low Stock Threshold -->
             <form id="settingsForm" class="settings-row" style="align-items: center;">
               <div>
                 <div class="settings-row-title">Low Stock Threshold</div>
@@ -157,7 +148,6 @@
           </div>
         </div>
 
-        
         <div class="settings-section">
           <div class="settings-heading">NOTIFICATIONS</div>
           <div class="settings-card">
@@ -184,7 +174,6 @@
           </div>
         </div>
 
-        <!-- ABOUT -->
         <div class="settings-section">
           <div class="settings-heading">ABOUT</div>
           <div class="settings-card">
@@ -204,8 +193,7 @@
     </main>
   </div>
 
-  <script src="js/script.js?v=10.0"></script>
-  <!-- Firebase Settings Script -->
-  <script type="module" src="js/settings.js"></script>
+  <script src="js/script.js?v=11.0" type="module"></script>
+  <script type="module" src="js/settings.js?v=11.0"></script>
 </body>
 </html>

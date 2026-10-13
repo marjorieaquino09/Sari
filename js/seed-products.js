@@ -126,7 +126,7 @@ export async function checkAndSeedDefaultProducts(userId) {
           category: prod[1],
           price: Number(prod[2]),
           stock: Number(prod[3]),
-          image: prod[4], // file name o image path reference
+          image: prod[4], 
           createdAt: serverTimestamp()
         });
       });

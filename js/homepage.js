@@ -1,19 +1,12 @@
-
 import { db, auth } from "./firebase-config.js";
-import { checkAuth, logoutUser } from "./auth.js";
-import { 
-  doc, 
-  getDoc, 
-  collection, 
-  query, 
-  where, 
-  onSnapshot, 
-  getDocs, 
-  addDoc, 
-  updateDoc, 
-  serverTimestamp 
+import { logoutUser } from "./auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
 
 import { initializeDefaultProducts } from "./init-products.js";
 
@@ -23,30 +16,23 @@ let searchQuery = "";
 let allProducts = [];
 let unsubscribeProducts = null;
 
+onAuthStateChanged(auth, async (user) => {
+  const isAuthPage = window.location.pathname.endsWith("login.html") ||
+                     window.location.pathname.endsWith("signup.html") ||
+                     window.location.pathname.endsWith("index.html");
 
-checkAuth(async (user) => {
-  currentUserId = user.uid;
+  // Kung nasa login o signup page, HUWAG mag-run o mag-redirect papuntang homepage!
+  if (isAuthPage) return;
 
-  
-  try {
-    const userDoc = await getDoc(doc(db, "users", currentUserId));
-    if (userDoc.exists()) {
-      const uData = userDoc.data();
-      const storeNameEl = document.getElementById("topbarStoreName");
-      if (storeNameEl) {
-        storeNameEl.innerText = uData.store_name || uData.full_name || "My Store";
-      }
-
-      const avatarEl = document.getElementById("avatarContainer");
-      if (avatarEl && uData.profile_image) {
-        avatarEl.innerHTML = `<img src="${uData.profile_image}" class="topbar-avatar" style="object-fit:cover;" alt="Avatar">`;
-      }
-    }
-  } catch (err) {
-    console.error("Error fetching user profile:", err);
+  if (!user) {
+    window.location.href = "login.html";
+    return;
   }
 
-  
+  currentUserId = user.uid;
+
+  // Ang avatar at pangalan ng store sa topbar ay hinahawakan na ng topbar.js
+
   try {
     if (typeof initializeDefaultProducts === "function") {
       await initializeDefaultProducts(currentUserId);
@@ -55,10 +41,8 @@ checkAuth(async (user) => {
     console.error("Error initializing default products:", seedErr);
   }
 
-  
   loadProductsRealtime();
 });
-
 
 function loadProductsRealtime() {
   const productGrid = document.getElementById("productGrid");
@@ -82,15 +66,14 @@ function loadProductsRealtime() {
   });
 }
 
-
 function renderProducts() {
   const productGrid = document.getElementById("productGrid");
   if (!productGrid) return;
 
   const filtered = allProducts.filter((p) => {
     const matchCategory = !selectedCategory || selectedCategory === "All" || p.category === selectedCategory;
-    const matchSearch = !searchQuery || 
-      (p.name && p.name.toLowerCase().includes(searchQuery.toLowerCase())) || 
+    const matchSearch = !searchQuery ||
+      (p.name && p.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (p.barcode && p.barcode.includes(searchQuery));
     return matchCategory && matchSearch;
   });
@@ -102,9 +85,7 @@ function renderProducts() {
 
   productGrid.innerHTML = filtered.map((p) => {
     const stock = Number(p.stock || 0);
-    const isAvailable = stock > 0;
-    
-    // Auto-detect image source format mula sa uploads/ folder, http, o base64
+
     let imgSource = "uploads/default.jpg";
     if (p.image) {
       if (p.image.startsWith("http") || p.image.startsWith("data:")) {
@@ -128,66 +109,20 @@ function renderProducts() {
           <div class="product-price">₱${Number(p.price || 0).toFixed(2)}</div>
         </div>
         <div class="product-bottom-row">
-          <span style="font-size: 0.75rem; font-weight: 700; color: ${isAvailable ? '#4a9c62' : '#d1544a'};">
+          <span style="font-size: 0.75rem; font-weight: 700; color: ${stock > 0 ? '#4a9c62' : '#d1544a'};">
             Stock: ${stock}
           </span>
           ${
-            isAvailable 
-              ? `<button class="add-cart-btn" data-id="${p.id}" style="border:none; cursor:pointer;"><i class="fa-solid fa-plus"></i></button>`
-              : `<span style="font-size: 0.75rem; color: #94a3b8; font-weight: 700;">Out of Stock</span>`
+            stock === 0
+              ? `<span style="font-size: 0.75rem; color: #94a3b8; font-weight: 700;">Out of Stock</span>`
+              : ``
           }
         </div>
       </div>
     `;
   }).join("");
-
- 
-  document.querySelectorAll(".add-cart-btn").forEach((btn) => {
-    btn.addEventListener("click", () => addToCart(btn.dataset.id));
-  });
 }
 
-// 4. Add to Cart Logic (Firestore)
-async function addToCart(productId) {
-  try {
-    const product = allProducts.find((p) => p.id === productId);
-    if (!product || Number(product.stock) <= 0) return;
-
-    const cartRef = collection(db, "cart");
-    const q = query(cartRef, where("userId", "==", currentUserId), where("productId", "==", productId));
-    const cartSnap = await getDocs(q);
-
-    if (!cartSnap.empty) {
-      const cartItem = cartSnap.docs[0];
-      const newQty = (cartItem.data().quantity || 0) + 1;
-
-      if (newQty <= Number(product.stock)) {
-        await updateDoc(doc(db, "cart", cartItem.id), {
-          quantity: newQty,
-          updatedAt: serverTimestamp()
-        });
-      } else {
-        alert("Sobra na sa available stock!");
-        return;
-      }
-    } else {
-      await addDoc(cartRef, {
-        userId: currentUserId,
-        productId: productId,
-        productName: product.name,
-        price: product.price,
-        quantity: 1,
-        createdAt: serverTimestamp()
-      });
-    }
-
-    alert(`Nai-add ang "${product.name}" sa cart!`);
-  } catch (err) {
-    console.error("Error adding to cart:", err);
-  }
-}
-
-// 5. Search at Category Event Listeners
 const searchForm = document.getElementById("searchForm");
 if (searchForm) {
   searchForm.addEventListener("submit", (e) => {
@@ -216,7 +151,8 @@ document.querySelectorAll(".category-pill").forEach((pill) => {
 
 const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
+  logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     logoutUser();
   });
 }

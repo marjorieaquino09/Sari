@@ -1,4 +1,3 @@
-// js/inventory.js
 import { db, auth } from "./firebase-config.js";
 import { checkAuth, logoutUser } from "./auth.js";
 import { 
@@ -21,11 +20,28 @@ let selectedCategory = "";
 let editingProductId = null;
 let html5QrCode = null;
 
-// 1. Check Session & User Setup
+async function createNotification(title, message, alertType = "inventory") {
+  if (!currentUserId) return;
+  try {
+    await addDoc(collection(db, "notifications"), {
+      userId: currentUserId,
+      type: "inventory",
+      title: title,
+      message: message,
+      description: message,
+      status: title,
+      category: alertType,
+      isRead: false,
+      created_at: serverTimestamp()
+    });
+  } catch (err) {
+    console.error("Error creating notification:", err);
+  }
+}
+
 checkAuth(async (user) => {
   currentUserId = user.uid;
 
-  // I-set muna habang naglo-load para hindi mag-flash ang email kung sakali
   const storeNameEl = document.getElementById("topbarStoreName") || document.getElementById("topbarUserEmail");
   if (storeNameEl) {
     storeNameEl.innerText = "Loading...";
@@ -36,7 +52,6 @@ checkAuth(async (user) => {
     if (storeNameEl) {
       if (userDoc.exists()) {
         const uData = userDoc.data();
-        // Siguraduhing store_name ang uunahin
         storeNameEl.innerText = uData.store_name || uData.full_name || "My Store";
       } else {
         storeNameEl.innerText = "My Store";
@@ -55,7 +70,6 @@ checkAuth(async (user) => {
   loadInventoryRealtime();
 });
 
-// 2. Real-time Firestore Sync
 function loadInventoryRealtime() {
   const q = query(collection(db, "products"), where("userId", "==", currentUserId));
 
@@ -70,7 +84,6 @@ function loadInventoryRealtime() {
   });
 }
 
-// 3. Update 4 Stat Cards
 function updateSummaryCards() {
   let totalProducts = allProducts.length;
   let lowStockCount = 0;
@@ -101,7 +114,6 @@ function updateSummaryCards() {
   setElemText("statInventoryValue", `₱${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}`);
 }
 
-// 4. Render Table
 function renderInventoryTable() {
   const tableBody = document.getElementById("inventoryTableBody");
   if (!tableBody) return;
@@ -175,7 +187,6 @@ function renderInventoryTable() {
   });
 }
 
-// 5. Populate Form for Editing
 function populateEditForm(id) {
   const product = allProducts.find(p => p.id === id);
   if (!product) return;
@@ -196,7 +207,6 @@ function populateEditForm(id) {
   }
 }
 
-// 6. Form Submission
 const addProductForm = document.getElementById("addProductForm");
 if (addProductForm) {
   addProductForm.addEventListener("submit", async (e) => {
@@ -250,6 +260,26 @@ async function saveOrUpdateToFirestore(name, category, barcode, stock, price, im
         updated_at: serverTimestamp()
       });
 
+      if (stock === 0) {
+        await createNotification(
+          "Out of Stock",
+          `Naubos na ang stock ng ${name} (0 pcs)!`,
+          "danger"
+        );
+      } else if (stock <= 5) {
+        await createNotification(
+          "Low Stock Alert",
+          `Kakaunti na lang ang stock ng ${name} (${stock} pcs remaining).`,
+          "warning"
+        );
+      } else {
+        await createNotification(
+          "Stock Updated",
+          `Na-update ang stock ng ${name} sa ${stock} pcs.`,
+          "info"
+        );
+      }
+
       alert("Product updated successfully!");
       editingProductId = null;
       if (btn) {
@@ -267,6 +297,26 @@ async function saveOrUpdateToFirestore(name, category, barcode, stock, price, im
         image: image,
         created_at: serverTimestamp()
       });
+
+      if (stock === 0) {
+        await createNotification(
+          "Out of Stock",
+          `Idinagdag ang ${name} ngunit WALANG STOCK (0 pcs)!`,
+          "danger"
+        );
+      } else if (stock <= 5) {
+        await createNotification(
+          "Low Stock Alert",
+          `Idinagdag ang ${name} sa inventory (${stock} pcs - Low Stock).`,
+          "warning"
+        );
+      } else {
+        await createNotification(
+          "New Product Added",
+          `Naidagdag ang ${name} sa inventory (${stock} pcs).`,
+          "info"
+        );
+      }
 
       alert("Product added successfully!");
     }
@@ -286,18 +336,25 @@ async function saveOrUpdateToFirestore(name, category, barcode, stock, price, im
   }
 }
 
-// 7. Delete Product
 async function deleteProduct(id) {
   if (confirm("Are you sure you want to delete this product?")) {
     try {
+      const targetProd = allProducts.find(p => p.id === id);
+      const prodName = targetProd ? targetProd.name : "Produkto";
+
       await deleteDoc(doc(db, "products", id));
+
+      await createNotification(
+        "Binurang Produkto",
+        `Tinanggal ang ${prodName} sa iyong inventory.`,
+        "warning"
+      );
     } catch (err) {
       console.error("Error deleting product:", err);
     }
   }
 }
 
-// Search & Filter listeners
 const inventorySearch = document.getElementById("inventorySearch");
 if (inventorySearch) {
   inventorySearch.addEventListener("input", (e) => {
@@ -314,7 +371,6 @@ if (categoryFilter) {
   });
 }
 
-// 8. Barcode Scanner Integration
 const startScanBtn = document.getElementById("startScanBtn");
 if (startScanBtn) {
   startScanBtn.addEventListener("click", () => {

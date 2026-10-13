@@ -6,7 +6,7 @@ const errorBox = document.getElementById("errorBox");
 
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Pinipigilan nitong mag-reload ang page
+    e.preventDefault();
 
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
@@ -17,10 +17,7 @@ if (loginForm) {
     }
 
     try {
-      
       await signInWithEmailAndPassword(auth, email, password);
-      
-    
       window.location.href = "homepage.html";
     } catch (error) {
       console.error("Login error:", error);
@@ -34,5 +31,18 @@ if (loginForm) {
         }
       }
     }
+  });
+}
+
+const togglePassword = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("loginPassword");
+
+if (togglePassword && passwordInput) {
+  togglePassword.addEventListener("click", () => {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    
+    togglePassword.classList.toggle("fa-eye");
+    togglePassword.classList.toggle("fa-eye-slash");
   });
 }

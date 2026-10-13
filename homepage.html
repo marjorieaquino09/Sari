@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SARI - Home</title>
-  <link rel="stylesheet" href="css/style.css?v=10.0">
-  <link rel="stylesheet" href="css/extra.css?v=10.0">
+  <link rel="stylesheet" href="css/dashboard.css?v=12.0">
+  <link rel="stylesheet" href="css/inventory.css?v=12.0">
+  <link rel="stylesheet" href="css/extra.css?v=12.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=12.0">
 </head>
 <body class="app-page">
 
   <div class="app-shell">
 
-    
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-top">
-        <a href="index.html" class="sidebar-logo">Sari</a>
+        <a href="homepage.html" class="sidebar-logo">Sari</a>
       </div>
 
-     <nav class="sidebar-nav">
-        <a href="index.html" class="sidebar-link active">
+      <nav class="sidebar-nav">
+        <a href="homepage.html" class="sidebar-link active">
           <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
           <span class="sidebar-label">Home</span>
         </a>
@@ -61,34 +62,35 @@
       </button>
     </aside>
 
-    
     <main class="main-content">
 
-      <!-- TOPBAR -->
       <div class="topbar-row">
-        <button class="topbar-menu-btn" id="topbarMenuBtn" type="button" aria-label="Toggle sidebar">
-          <i class="fa-solid fa-bars"></i>
-        </button>
         <div class="topbar">
           <div class="topbar-left">
             <button class="topbar-home-btn" type="button">Home</button>
           </div>
-          <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit;">
-            <span class="topbar-avatar" id="avatarContainer"></span>
-            <span id="topbarStoreName">Loading...</span>
-          </a>
+
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="notifications.html" id="notificationBtn" style="position: relative; background: rgba(255,255,255,0.1); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;" title="Notifications">
+              <i class="fa-solid fa-bell" style="font-size: 1rem;"></i>
+              <span id="notifBadge" style="display: none; position: absolute; top: -2px; right: -2px; background: #ef4444; color: #ffffff; font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 10px; border: 2px solid #111d17; min-width: 18px; text-align: center;">0</span>
+            </a>
+
+            <a class="topbar-store" id="profileBtn" href="profile.html" style="text-decoration:none; color:inherit; display: flex; align-items: center; gap: 10px;">
+              <span class="topbar-avatar" id="avatarContainer"></span>
+              <span id="topbarStoreName">Loading...</span>
+            </a>
+          </div>
         </div>
       </div>
 
-     
-      <div class="search-box" style="margin-bottom: 20px;">
-        <form id="searchForm">
-          <input type="text" id="searchInput" placeholder="Search products...">
+      <div class="home-search-bar" style="margin-bottom: 20px;">
+        <form id="searchForm" style="display:flex; width:100%; max-width:600px; margin:0 auto;">
+          <input type="text" id="searchInput" placeholder="Search products..." style="flex:1; padding:12px 18px; border-radius:20px; border:none; outline:none; font-size:0.95rem;">
         </form>
       </div>
 
-      
-      <div class="category-filter-container">
+      <div class="category-pills" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:15px; margin-bottom:20px;">
         <button class="category-pill active" data-category="All">All</button>
         <button class="category-pill" data-category="Household">Household</button>
         <button class="category-pill" data-category="Beverage">Beverage</button>
@@ -98,18 +100,17 @@
         <button class="category-pill" data-category="Biscuits">Biscuits</button>
         <button class="category-pill" data-category="Chips">Chips</button>
         <button class="category-pill" data-category="Condiments">Condiments</button>
-        <button class="category-pill" data-category="Noodles">Noodles</button> <!-- Idagdag ito -->
+        <button class="category-pill" data-category="Noodles">Noodles</button>
       </div>
 
-      
-      <div id="productGrid" class="product-grid">
-        <p style="color: #ffffff; grid-column: 1 / -1; text-align: center; padding: 40px;">Loading products...</p>
+      <div id="productGrid" class="pos-grid">
+        <p style="grid-column: 1 / -1; color: #fff; text-align: center; padding: 40px;">Naglo-load ng mga produkto...</p>
       </div>
 
     </main>
   </div>
 
-  <script src="js/script.js?v=6.0"></script>
-  <script type="module" src="js/homepage.js"></script>
+  <script src="js/script.js?v=11.0" type="module"></script>
+  <script type="module" src="js/homepage.js?v=11.0"></script>
 </body>
 </html>
